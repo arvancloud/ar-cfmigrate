@@ -29,7 +29,7 @@ namespace CfMigrate.Arvancloud.Api.Domain
                 });
         }
 
-        public async Task<bool> CreateNewDomain(string domain)
+        public async Task<string> CreateNewDomain(string domain)
         {
             try
             {
@@ -43,11 +43,11 @@ namespace CfMigrate.Arvancloud.Api.Domain
                         .ReceiveJson<BaseArvanModel<DomainOutput>>()
                 );
 
-                return true;
+                return result.Data.Domain;
             }
             catch (FlurlHttpTimeoutException)
             {
-                throw new Exception("Timeout");
+                throw new Exception("Timeout after some retry");
             }
             catch (FlurlHttpException e)
             {

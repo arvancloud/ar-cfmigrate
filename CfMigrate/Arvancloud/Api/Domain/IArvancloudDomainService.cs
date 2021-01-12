@@ -4,6 +4,6 @@ namespace CfMigrate.Arvancloud.Api.Domain
 {
     public interface IArvancloudDomainService
     {
-        Task<bool> CreateNewDomain(string domain);
+        Task<string> CreateNewDomain(string domain);
     }
 }
