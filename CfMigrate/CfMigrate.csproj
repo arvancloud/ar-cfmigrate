@@ -7,10 +7,11 @@
 
     <ItemGroup>
       <PackageReference Include="Flurl" Version="3.0.1" />
+      <PackageReference Include="Flurl.Http" Version="3.0.1" />
+      <PackageReference Include="Polly" Version="7.2.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Arvancloud\Models" />
       <Folder Include="Cloudflare\Models" />
     </ItemGroup>
 
