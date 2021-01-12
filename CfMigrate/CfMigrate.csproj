@@ -5,4 +5,13 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Flurl" Version="3.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Arvancloud\Models" />
+      <Folder Include="Cloudflare\Models" />
+    </ItemGroup>
+
 </Project>
