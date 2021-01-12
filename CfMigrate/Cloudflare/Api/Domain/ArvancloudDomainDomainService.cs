@@ -1,24 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CfMigrate.Arvancloud.Models;
 using CfMigrate.Arvancloud.Models.Domain;
+using CfMigrate.Cloudflare.Models;
 using Flurl.Http;
 using Polly;
 using Polly.Retry;
 
-namespace CfMigrate.Arvancloud.Api.Domain
+namespace CfMigrate.Cloudflare.Api.Domain
 {
-    public class ArvancloudDomainDomainService : IArvancloudDomainService
+    public class CloudflareDomainDomainService : ICloudflareDomainService
     {
         private readonly string _token;
         private readonly string _baseApi;
         private const string UrlParam = "domains";
         private readonly AsyncRetryPolicy _polly;
 
-        public ArvancloudDomainDomainService()
+        public CloudflareDomainDomainService()
         {
-            _token = ArvanTokenHandler.GetToken();
-            _baseApi = BaseArvanValue.BaseApi + UrlParam;
+            _token = CloudflareTokenHandler.GetToken();
+            _baseApi = BaseCloudflareValue.BaseApi + UrlParam;
 
             _polly = Policy
                 .Handle<FlurlHttpTimeoutException>()
@@ -29,7 +30,7 @@ namespace CfMigrate.Arvancloud.Api.Domain
                 });
         }
 
-        public async Task<string> CreateNewDomain(string domain)
+        public async Task<List<string>> ListDomains()
         {
             try
             {
@@ -38,12 +39,12 @@ namespace CfMigrate.Arvancloud.Api.Domain
                         .WithOAuthBearerToken(_token)
                         .PostJsonAsync(new DomainInput
                         {
-                            Domain = domain
+                            Domain = ""
                         })
-                        .ReceiveJson<BaseArvanModel<DomainOutput>>()
+                        .ReceiveJson<BaseCloudflareModel<List<string>>>()
                 );
 
-                return result.Data.Domain;
+                return result.Result;
             }
             catch (FlurlHttpTimeoutException)
             {
@@ -51,9 +52,9 @@ namespace CfMigrate.Arvancloud.Api.Domain
             }
             catch (FlurlHttpException e)
             {
-                var error = await e.GetResponseJsonAsync<BaseArvanError>();
+                var error = await e.GetResponseJsonAsync<BaseCloudflareError>();
 
-                throw new Exception(error.Message);
+                throw new Exception(string.Join(",", error.Messages));
             }
         }
     }
