@@ -5,22 +5,23 @@ using System.Threading.Tasks;
 using CfMigrate.Cloudflare.Handle;
 using CfMigrate.Cloudflare.Models;
 using CfMigrate.Cloudflare.Models.Dns;
+using CfMigrate.Cloudflare.Models.DnsSec;
 using CfMigrate.Setting;
 using Flurl;
 using Flurl.Http;
 using Polly;
 using Polly.Retry;
 
-namespace CfMigrate.Cloudflare.Api.Dns
+namespace CfMigrate.Cloudflare.Api.DnsSec
 {
-    public class CloudflareDnsService : ICloudflareDnsService
+    public class CloudflareDnsSecService : ICloudflareDnsSecService
     {
         private readonly string _token;
         private readonly string _baseApi;
         private const string UrlParam = "zones";
         private readonly AsyncRetryPolicy _polly;
 
-        public CloudflareDnsService()
+        public CloudflareDnsSecService()
         {
             _token = CloudflareTokenHandler.GetCompleteToken();
             _baseApi = UrlHandle.ConcatBaseUrlWithParam(BaseCloudflareValue.BaseApi, UrlParam);
@@ -30,25 +31,24 @@ namespace CfMigrate.Cloudflare.Api.Dns
                 .WaitAndRetryAsync(PollySetting.RetrySetting);
         }
 
-        public async Task<List<ShortDnsOutput>> GetDns(string zoneIdentifier)
+        public async Task<List<ShortDnsSecOutput>> GetDnsSec(string zoneIdentifier)
         {
             try
             {
                 var result = await _polly
                     .ExecuteAsync(async () =>
                         await _baseApi
-                            .AppendPathSegment(zoneIdentifier + "/" + "dns_records")
+                            .AppendPathSegment(zoneIdentifier + "/" + "dnssec")
                             .WithHeader(BaseCloudflareValue.Authorization, _token)
                             .GetAsync()
-                            .ReceiveJson<BaseCloudflareModel<List<DnsOutput>>>()
+                            .ReceiveJson<BaseCloudflareModel<List<DnsSecOutput>>>()
                     );
 
                 var items = result.Result
-                    .Select(a => new ShortDnsOutput
+                    .Select(a => new ShortDnsSecOutput
                     {
-                        Name = a.Name,
-                        Ttl = a.Ttl,
-                        Type = a.Type
+                        Status = a.Status,
+                        Ds = a.Ds
                     }).ToList();
 
                 return items;

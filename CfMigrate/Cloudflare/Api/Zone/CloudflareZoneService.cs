@@ -42,14 +42,14 @@ namespace CfMigrate.Cloudflare.Api.Zone
                 );
 
                 //todo we can add automapper
-                var domains = result.Result
+                var items = result.Result
                     .Select(a => new DomainWithZoneIdentifierOutput
                     {
                         Id = a.Id,
                         Name = a.Name
                     }).ToList();
 
-                return domains;
+                return items;
             }
             catch (FlurlHttpTimeoutException)
             {
