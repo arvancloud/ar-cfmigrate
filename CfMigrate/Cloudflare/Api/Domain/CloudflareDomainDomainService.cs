@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using CfMigrate.Arvancloud.Models.Domain;
 using CfMigrate.Cloudflare.Models;
 using CfMigrate.Cloudflare.Models.Token;
+using CfMigrate.Cloudflare.Models.Zone;
 using Flurl.Http;
 using Polly;
 using Polly.Retry;
@@ -33,21 +34,26 @@ namespace CfMigrate.Cloudflare.Api.Domain
                 });
         }
 
-        public async Task<List<string>> ListDomains()
+        public async Task<List<DomainWithZoneIdentifierOutput>> GetDomainsFromZone()
         {
             try
             {
                 var result = await _polly.ExecuteAsync(async () =>
                     await _baseApi
                         .WithHeader(Authorization, _token)
-                        .PostJsonAsync(new DomainInput
-                        {
-                            Domain = ""
-                        })
-                        .ReceiveJson<BaseCloudflareModel<List<string>>>()
+                        .GetAsync()
+                        .ReceiveJson<BaseCloudflareModel<List<ZoneOutput>>>()
                 );
 
-                return result.Result;
+                //todo we can add automapper
+                var domains = result.Result
+                    .Select(a => new DomainWithZoneIdentifierOutput
+                    {
+                        Id = a.Id,
+                        Name = a.Name
+                    }).ToList();
+
+                return domains;
             }
             catch (FlurlHttpTimeoutException)
             {
