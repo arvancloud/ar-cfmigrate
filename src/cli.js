@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const prompts = require('prompts')
 const cloudflare = require('cloudflare')
 const ora = require('ora')
