@@ -1,0 +1,33 @@
+{
+  "name": "ar-cfmigrate",
+  "version": "1.0.0",
+  "description": "CloudFlare to ArvanCloud CDN Migration Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SadeghHayeri/ar-cfmigrate.git"
+  },
+  "keywords": [
+    "Arvan",
+    "cloudflare"
+  ],
+  "author": "Sadegh Hayeri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SadeghHayeri/ar-cfmigrate/issues"
+  },
+  "homepage": "https://github.com/SadeghHayeri/ar-cfmigrate#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
+    "chalk": "^4.1.0",
+    "cloudflare": "^2.7.0",
+    "inquirer": "^7.3.3",
+    "ora": "^5.2.0",
+    "pino": "^6.10.0",
+    "prompts": "^2.4.0"
+  }
+}
