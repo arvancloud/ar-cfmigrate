@@ -3,8 +3,12 @@ CloudFlare to ArvanCloud CDN Migration Tool
 
 # Usage
 ```
+# NPM
 npm i -g cf2ar
 cf2ar 
+
+# DOCKER 
+docker run -it sadeghhayeri/cf2ar:1.1.0
 ```
 
 ### Example
