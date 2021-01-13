@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using CfMigrate.Arvancloud.Models;
 using CfMigrate.Arvancloud.Models.Domain;
+using CfMigrate.Setting;
+using Flurl;
 using Flurl.Http;
 using Polly;
 using Polly.Retry;
@@ -22,11 +24,7 @@ namespace CfMigrate.Arvancloud.Api.Domain
 
             _polly = Policy
                 .Handle<FlurlHttpTimeoutException>()
-                .WaitAndRetryAsync(new[]
-                {
-                    TimeSpan.FromSeconds(1),
-                    TimeSpan.FromSeconds(2)
-                });
+                .WaitAndRetryAsync(PollySetting.RetrySetting);
         }
 
         public async Task<string> CreateNewDomain(string domain)
@@ -35,6 +33,7 @@ namespace CfMigrate.Arvancloud.Api.Domain
             {
                 var result = await _polly.ExecuteAsync(async () =>
                     await _baseApi
+                        .AppendPathSegment("dns-service")
                         .WithOAuthBearerToken(_token)
                         .PostJsonAsync(new DomainInput
                         {

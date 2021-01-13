@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using CfMigrate.Cloudflare.Models.Zone;
 
-namespace CfMigrate.Cloudflare.Api.Domain
+namespace CfMigrate.Cloudflare.Api.Zone
 {
-    public interface ICloudflareDomainService
+    public interface ICloudflareZoneService
     {
-        Task<bool> VerifyToken();
         Task<List<DomainWithZoneIdentifierOutput>> GetDomainsFromZone();
     }
 }
