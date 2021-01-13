@@ -30,3 +30,6 @@ User Cloudflare API Token
 * If projects require any update or edit, merge requests will be accepted in GitHub after reassessment and reapproval.
 * Approved projects will be forked in GitHub, and ArvanCloud will star them.
 * GitHub name and address of the approved project doer will be published alongside the project. 
+
+## Wiki
+[github.com/MHKarami97/ar-cfmigrate/wiki](https://github.com/MHKarami97/ar-cfmigrate/wiki)
