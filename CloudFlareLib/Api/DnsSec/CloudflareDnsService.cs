@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using CfMigrate.Cloudflare.Handle;
-using CfMigrate.Cloudflare.Models;
-using CfMigrate.Cloudflare.Models.DnsSec;
-using CfMigrate.Setting;
+using CloudFlareLib.Handle;
+using CloudFlareLib.Models;
+using CloudFlareLib.Models.DnsSec;
+using CloudFlareLib.Setting;
 using Flurl;
 using Flurl.Http;
 using Polly;
 using Polly.Retry;
 
-namespace CfMigrate.Cloudflare.Api.DnsSec
+namespace CloudFlareLib.Api.DnsSec
 {
     public class CloudflareDnsSecService : ICloudflareDnsSecService
     {
@@ -30,7 +29,7 @@ namespace CfMigrate.Cloudflare.Api.DnsSec
                 .WaitAndRetryAsync(PollySetting.RetrySetting);
         }
 
-        public async Task<List<ShortDnsSecOutput>> GetDnsSec(string zoneIdentifier)
+        public async Task<List<DnsSecOutput>> GetDnsSec(string zoneIdentifier)
         {
             try
             {
@@ -43,14 +42,7 @@ namespace CfMigrate.Cloudflare.Api.DnsSec
                             .ReceiveJson<BaseCloudflareModel<List<DnsSecOutput>>>()
                     );
 
-                var items = result.Result
-                    .Select(a => new ShortDnsSecOutput
-                    {
-                        Status = a.Status,
-                        Ds = a.Ds
-                    }).ToList();
-
-                return items;
+                return result.Result;
             }
             catch (FlurlHttpTimeoutException)
             {
