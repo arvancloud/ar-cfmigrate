@@ -1,8 +1,6 @@
 const prompts = require('prompts')
 const cloudflare = require('cloudflare')
-const ora = require('ora');
-const Promise = require('bluebird')
-const chalk = require('chalk')
+const ora = require('ora')
 const ArvanCloud = require('./arvanclient')
 
 
@@ -82,13 +80,13 @@ async function cli() {
       await arvan.createDNSRecord(
         selectedZone.zone.name,
         dnsRecord.type,
-        dnsRecord.name,
+        dnsRecord.name.substr(0, dnsRecord.name.length - selectedZone.zone.name.length - 1),
         dnsRecord.content,
         dnsRecord.ttl,
         dnsRecord.proxied,
       )
     } catch(e) {
-      return spinner.fail(`Error on creating DNS Record ${dnsRecord.name}`)
+      spinner.fail(`Error on creating DNS Record ${dnsRecord.name}`)
     }
     spinner.succeed()
   }
