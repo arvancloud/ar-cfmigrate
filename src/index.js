@@ -2,6 +2,7 @@ const prompts = require('prompts')
 const cloudflare = require('cloudflare')
 const ora = require('ora')
 const ArvanCloud = require('./arvanclient')
+const chalk = require('chalk')
 
 
 async function cli() {
@@ -66,16 +67,20 @@ async function cli() {
   try {
     await arvan.createDomain(selectedZone.zone.name)
   } catch(e) {
-    return spinner.fail('Error on creating domain in Arvan')
+    return spinner.fail(e.toString())
   }
   spinner.succeed()
+
+  console.log('')
 
   spinner = ora(`Loading cloudflare DNS records`).start();
   const dnsRecords = (await cf.dnsRecords.browse(selectedZone.zone.id)).result
   spinner.succeed()
 
+  console.log('')
+
   for(let dnsRecord of dnsRecords) {
-    spinner = ora(`Add DNS record ${dnsRecord.name}`).start();
+    spinner = ora(`Add ${chalk.blue(dnsRecord.type)} Record ${chalk.cyan(dnsRecord.name)} [${chalk.gray(dnsRecord.content)}]`).start()
     try {
       await arvan.createDNSRecord(
         selectedZone.zone.name,
@@ -84,11 +89,12 @@ async function cli() {
         dnsRecord.content,
         dnsRecord.ttl,
         dnsRecord.proxied,
+        dnsRecord.priority,
       )
+      spinner.succeed()
     } catch(e) {
-      spinner.fail(`Error on creating DNS Record ${dnsRecord.name}`)
+      spinner.fail(`Add ${chalk.blue(dnsRecord.type)} Record ${chalk.cyan(dnsRecord.name)} [${chalk.gray(dnsRecord.content)}] - ${e.toString()}`)
     }
-    spinner.succeed()
   }
 }
 

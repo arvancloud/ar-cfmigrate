@@ -11,8 +11,16 @@ class ArvanClient {
     });
   }
 
+  async getDomains() {
+    const req = await this.client.get('domains')
+    return req.data.data.map(domain => domain.name)
+  }
+
   async createDomain(domain) {
-    await this.client.post(`/domains/dns-service`, {domain})
+    const domains = await this.getDomains()
+    if (!domains.includes(domain)) {
+      await this.client.post(`/domains/dns-service`, {domain})
+    }
   }
 
   _getClosestValidTTL(ttl) {
@@ -22,10 +30,32 @@ class ArvanClient {
     });
   }
 
-  async createDNSRecord(domain, type, name, value, ttl, cloud) {
+  _getRecordValue(type, value, priority) {
+    switch (type.toLowerCase()) {
+      case 'a':
+      case 'aaaa':
+        return [{ip: value}]
+      case 'cname':
+        return {host: value, host_header: 'source'}
+      case 'aname':
+        return {location: value, host_header: 'source'}
+      case 'ns':
+        return {host: value}
+      case 'mx':
+        return {host: value, priority}
+      case 'txt':
+        return {text: value}
+      case 'ptr':
+        return {domain: value}
+    }
+  }
+
+  async createDNSRecord(domain, type, name, value, ttl, cloud, priority=null) {
     ttl = this._getClosestValidTTL(ttl)
     cloud = cloud ? 'true' : 'false'
-    value = [{ip: value}]
+    value = this._getRecordValue(type, value, priority)
+    type = type.toLowerCase()
+
     await this.client.post(`/domains/${domain}/dns-records`, {type, name, value, ttl, cloud})
   }
 }
