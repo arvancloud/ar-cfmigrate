@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CfMigrate.Arvancloud.Api.Domain
+namespace ArvanCloudLib.Api.Domain
 {
     public interface IArvancloudDomainService
     {

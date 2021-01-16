@@ -32,4 +32,4 @@ User Cloudflare API Token
 * GitHub name and address of the approved project doer will be published alongside the project. 
 
 ## Wiki
-[github.com/MHKarami97/ar-cfmigrate/wiki](https://github.com/MHKarami97/ar-cfmigrate/wiki)
+[document](doc)

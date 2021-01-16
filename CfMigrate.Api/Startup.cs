@@ -1,6 +1,8 @@
+using ArvanCloudLib.Api.Dns;
 using ArvancloudLib.Api.Token;
 using AutoMapper;
 using CfMigrate.Api.Config.Mapper;
+using CfMigrate.Api.Service;
 using CloudFlareLib.Api.Auth;
 using CloudFlareLib.Api.Dns;
 using CloudFlareLib.Api.DnsSec;
@@ -39,8 +41,11 @@ namespace CfMigrate.Api
             services.AddTransient<ICloudflareZoneService, CloudflareZoneService>();
             services.AddTransient<ICloudflareDnsSecService, CloudflareDnsSecService>();
             services.AddTransient<ICloudflareTokenService, CloudflareTokenService>();
-            
+
             services.AddTransient<IArvancloudTokenService, ArvancloudTokenService>();
+            services.AddTransient<IArvancloudDnsService, ArvancloudDnsService>();
+
+            services.AddTransient<IConvertor, Convertor>();
 
             services.AddSwaggerGen(c =>
             {

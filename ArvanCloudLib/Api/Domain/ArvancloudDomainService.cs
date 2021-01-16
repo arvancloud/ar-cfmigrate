@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using ArvanCloudLib.Models;
 using ArvanCloudLib.Models.Domain;
 using ArvanCloudLib.Setting;
-using CfMigrate.Arvancloud;
-using CfMigrate.Arvancloud.Api.Domain;
 using Flurl;
 using Flurl.Http;
 using Polly;
@@ -12,16 +10,16 @@ using Polly.Retry;
 
 namespace ArvanCloudLib.Api.Domain
 {
-    public class ArvancloudDomainDomainService : IArvancloudDomainService
+    public class ArvancloudDomainService : IArvancloudDomainService
     {
         private readonly string _token;
         private readonly string _baseApi;
         private const string UrlParam = "domains";
         private readonly AsyncRetryPolicy _polly;
 
-        public ArvancloudDomainDomainService()
+        public ArvancloudDomainService()
         {
-            _token = ArvanTokenHandler.GetToken();
+            _token = ArvanTokenHandler.GetCompleteToken();
             _baseApi = BaseArvanValue.BaseApi + UrlParam;
 
             _polly = Policy
@@ -36,7 +34,7 @@ namespace ArvanCloudLib.Api.Domain
                 var result = await _polly.ExecuteAsync(async () =>
                     await _baseApi
                         .AppendPathSegment("dns-service")
-                        .WithOAuthBearerToken(_token)
+                        .WithHeader(BaseArvanValue.Authorization, _token)
                         .PostJsonAsync(new DomainInput
                         {
                             Domain = domain

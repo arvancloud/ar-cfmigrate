@@ -13,5 +13,10 @@
         {
             _token = token;
         }
+        
+        public static string GetCompleteToken()
+        {
+            return BaseArvanValue.TokenType + " " + GetToken();
+        }
     }
 }
