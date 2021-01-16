@@ -56,10 +56,10 @@ git clone git@github.com:arvancloud/ar-cfmigrate.git && cd ar-cfmigrate/src && n
 ```
 
 ## Capabalities
-- [x] Register Domain in ArvanCloud DNS
-- [x] Export DNS records from Cloudflare and Import to Arvancloud Panel
-- [ ] Config Cache TTL and settings
-- [ ] Config firewall rules 
+- Register Domain in ArvanCloud DNS
+- Export DNS records from Cloudflare and Import to Arvancloud Panel
+- Config Cache TTL and settings
+- Config firewall rules 
 
 ### 👨🏻‍💻 Contributors:
 - SadeghHayeri [![https://github.com/sadeghhayeri](https://img.shields.io/github/followers/sadeghhayeri?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/sadeghhayeri)
