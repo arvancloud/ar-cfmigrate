@@ -1,14 +1,23 @@
 # ar-cfmigrate
 CloudFlare to ArvanCloud CDN Migration Tool
 
+# Brief
+A tool to migrate a Domain(DNS-CDN-...) configs from Cloudflare panel to Arvancloud (as much as possible)
+
+## Input
+User Arvancloud API Token 
+User Cloudflare API Token
+
 # Usage
 ```
-# NPM
-npm i -g cf2ar
-cf2ar 
-
 # DOCKER 
-docker run -it sadeghhayeri/cf2ar:1.1.0
+git clone git@github.com:arvancloud/ar-cfmigrate.git && cd ar-cfmigrate 
+docker build -t ar-cfmigrate .
+docker run -it ar-cfmigrate
+
+# NODE
+git clone git@github.com:arvancloud/ar-cfmigrate.git && cd ar-cfmigrate/src && npm i
+./cli.js
 ```
 
 ### Example
@@ -46,33 +55,11 @@ docker run -it sadeghhayeri/cf2ar:1.1.0
 ✔ Add TXT Record example.com [zoho-verification=zb23382325.zmverify.zoho.com]
 ```
 
----
-# Brief
-A tool to migrate a Domain(DNS-CDN-...) configs from Cloudflare panel to Arvancloud (as much as possible)
-
-## Input
-User Arvancloud API Token 
-User Cloudflare API Token
-
 ## Capabalities
-* Register Domain in ArvanCloud DNS
-* Export DNS records from Cloudflare and Import to Arvancloud Panel
-* Config Cache TTL and settings
-* Config firewall rules 
-* ...
+- [x] Register Domain in ArvanCloud DNS
+- [x] Export DNS records from Cloudflare and Import to Arvancloud Panel
+- [ ] Config Cache TTL and settings
+- [ ] Config firewall rules 
 
-## Useful Links
-[Arvancloud CDN API Documentation](https://www.arvancloud.com/docs/api/cdn/4.0)
-[Cloudflare CDN API Documentation](https://api.cloudflare.com/)
-
-
-## Terms and Conditions
-* All projects received to ArvanCloud will be reviewed, and the price will be paid to the first approved project.
-* All projects have to have test and execution document.
-* The project doer has to solve issues and apply required changes for 6 months after approval of the project.
-* General changes or changing programming language in each project has to be approved by ArvanCloud.
-* In case more than one project is approved by ArvanCLoud, the project fee will be equally divided between winning projects.
-* In the evaluation and code reviews stages of a project, no new request for the same project will be accepted. In case the reviewed project fails to pass the quality assessments, the project will be reactivated.
-* If projects require any update or edit, merge requests will be accepted in GitHub after reassessment and reapproval.
-* Approved projects will be forked in GitHub, and ArvanCloud will star them.
-* GitHub name and address of the approved project doer will be published alongside the project. 
+### 👨🏻‍💻 Contributors:
+- SadeghHayeri [![https://github.com/sadeghhayeri](https://img.shields.io/github/followers/sadeghhayeri?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/sadeghhayeri)
