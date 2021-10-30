@@ -66,12 +66,3 @@ git clone git@github.com:arvancloud/ar-cfmigrate.git && cd ar-cfmigrate/src && n
 ✔ Add TXT Record emails._domainkey.example.com [v=DKIM1; k=rsa; p=MIGfMA0GC...QlZ3QIDAQAB]
 ✔ Add TXT Record example.com [zoho-verification=zb23382325.zmverify.zoho.com]
 ```
-
-## Capabalities
-- Register Domain in ArvanCloud DNS
-- Export DNS records from Cloudflare and Import to Arvancloud Panel
-- Config Cache TTL and settings
-- Config firewall rules 
-
-### 👨🏻‍💻 Contributors:
-- SadeghHayeri [![https://github.com/sadeghhayeri](https://img.shields.io/github/followers/sadeghhayeri?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/sadeghhayeri)

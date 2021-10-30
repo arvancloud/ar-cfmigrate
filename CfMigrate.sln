@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CfMigrate.Api", "CfMigrate.Api\CfMigrate.Api.csproj", "{441225DD-3857-4F64-A8E1-CA86429FB0FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFlareLib", "CloudFlareLib\CloudFlareLib.csproj", "{AED6B9B9-9263-4D72-A78A-2DBB20E4D485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArvanCloudLib", "ArvanCloudLib\ArvanCloudLib.csproj", "{4CC5F761-6351-4BEE-B51E-B0F1665DB329}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{441225DD-3857-4F64-A8E1-CA86429FB0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{441225DD-3857-4F64-A8E1-CA86429FB0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{441225DD-3857-4F64-A8E1-CA86429FB0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{441225DD-3857-4F64-A8E1-CA86429FB0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED6B9B9-9263-4D72-A78A-2DBB20E4D485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED6B9B9-9263-4D72-A78A-2DBB20E4D485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED6B9B9-9263-4D72-A78A-2DBB20E4D485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED6B9B9-9263-4D72-A78A-2DBB20E4D485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC5F761-6351-4BEE-B51E-B0F1665DB329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC5F761-6351-4BEE-B51E-B0F1665DB329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC5F761-6351-4BEE-B51E-B0F1665DB329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC5F761-6351-4BEE-B51E-B0F1665DB329}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
