@@ -1,6 +1,18 @@
 # ar-cfmigrate
 CloudFlare to ArvanCloud CDN Migration Tool
+# Usage
+```
+usage: main.py [-h] -arkey --arvan-api-key -cfkey --cloudflare-api-key [-v]
 
+python main.py -arkey 'Apikey xxxxx' -cfkey 'xxxxx' -v
+
+```
+---
+# Installation
+```
+pip install -r requirements.txt
+
+```
 # Brief
 A tool to migrate a Domain(DNS-CDN-...) configs from Cloudflare panel to Arvancloud (as much as possible)
 
